@@ -9,11 +9,20 @@
 namespace Boa\Authentication;
 
 class Session {
-    public function Start() {
+
+    /**
+     * Starts a session.
+     * @return void
+     */
+    public function Start(): void {
         session_start();
     }
 
-    public function Stop() {
+    /**
+     * Ends a session.
+     * @return void
+     */
+    public function Stop(): void {
         session_destroy();
     }
 }

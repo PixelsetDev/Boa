@@ -11,19 +11,30 @@ namespace Boa\Authentication;
 class Password {
     private string $Algorithm;
 
-    public function __construct($Algorithm = 'PASSWORD_DEFAULT') {
-        $this->Algorithm = match ($Algorithm) {
-            'PASSWORD_BCRYPT' => PASSWORD_BCRYPT,
-            'PASSWORD_ARGON2I' => PASSWORD_ARGON2I,
-            'PASSWORD_ARGON2ID' => PASSWORD_ARGON2ID,
-            default => PASSWORD_DEFAULT
-        };
+    /**
+     * Creates a new Password object.
+     * @param $Algorithm string The algorithm to use for hashing (default: PASSWORD_DEFAULT).
+     */
+    public function __construct(string $Algorithm = PASSWORD_DEFAULT) {
+        $this->Algorithm = $Algorithm;
     }
+
+    /**
+     * Hashes a password.
+     * @param $password string The plaintext password to hash.
+     * @return string The hashed password.
+     */
     public function Hash($password): string {
         return password_hash($password, $this->Algorithm);
     }
 
-    public function Verify($password): bool {
-        return password_verify($password, $this->Algorithm);
+    /**
+     * Verifies that the password submitted is valid.
+     * @param $password string The plaintext password to verify.
+     * @param $hash string The hashed password to verify against.
+     * @return bool Whether the password is valid.
+     */
+    public function Verify($password, $hash): bool {
+        return password_verify($password, $hash);
     }
 }

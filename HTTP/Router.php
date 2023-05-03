@@ -10,49 +10,89 @@ namespace Boa\HTTP;
 
 class Router
 {
-    public function GET($route, $path_to_include)
+    /**
+     * Processes incoming GET requests.
+     * @param $route string The route to match.
+     * @param $path_to_include string The file that should be included if the route matches.
+     * @return void
+     */
+    public function GET(string $route, string $path_to_include): void
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $this->route($route, $path_to_include);
-        } else {
-            $this->bad();
         }
     }
 
-    public function POST($route, $path_to_include)
+    /**
+     * Processes incoming POST requests.
+     * @param $route string The route to match.
+     * @param $path_to_include string The file that should be included if the route matches.
+     * @return void
+     */
+    public function POST(string $route, string $path_to_include): void
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->route($route, $path_to_include);
         }
     }
 
-    public function PUT($route, $path_to_include)
+    /**
+     * Processes incoming PUT requests.
+     * @param $route string The route to match.
+     * @param $path_to_include string The file that should be included if the route matches.
+     * @return void
+     */
+    public function PUT(string $route, string $path_to_include): void
     {
         if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
             $this->route($route, $path_to_include);
         }
     }
 
-    public function PATCH($route, $path_to_include)
+    /**
+     * Processes incoming PATCH requests.
+     * @param $route string The route to match.
+     * @param $path_to_include string The file that should be included if the route matches.
+     * @return void
+     */
+    public function PATCH(string $route, string $path_to_include): void
     {
         if ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
             $this->route($route, $path_to_include);
         }
     }
 
-    public function DELETE($route, $path_to_include)
+    /**
+     * Processes incoming DELETE requests.
+     * @param $route string The route to match.
+     * @param $path_to_include string The file that should be included if the route matches.
+     * @return void
+     */
+    public function DELETE(string $route, string $path_to_include): void
     {
         if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
             $this->route($route, $path_to_include);
         }
     }
 
-    public function ANY($route, $path_to_include)
+    /**
+     * Processes any incoming requests.
+     * @param $route string The route to match.
+     * @param $path_to_include string The file that should be included if the route matches.
+     * @return void
+     */
+    public function ANY(string $route, string $path_to_include): void
     {
         $this->route($route, $path_to_include);
     }
 
-    public function route($route, $path_to_include)
+    /**
+     * Processes incoming requests.
+     * @param $route string The route to match.
+     * @param $path_to_include string The file that should be included if the route matches.
+     * @return void
+     */
+    public function route(string $route, string $path_to_include): void
     {
         $callback = $path_to_include;
         if (!is_callable($callback)) {
@@ -102,10 +142,5 @@ class Router
         }
         require_once __DIR__.'/../../'.$path_to_include;
         exit;
-    }
-
-    public function bad()
-    {
-
     }
 }

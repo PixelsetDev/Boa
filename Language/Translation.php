@@ -13,7 +13,10 @@ class Translation
 
     private string $LanguageFile;
 
-    public function __construct($LanguageFile = null)
+    /**
+     * @param $LanguageFile string The language file to use.
+     */
+    public function __construct(string $LanguageFile)
     {
         if ($LanguageFile != null) {
             $this->LanguageFile = $LanguageFile;
@@ -23,6 +26,10 @@ class Translation
         }
     }
 
+    /**
+     * @param string $key The key to translate.
+     * @return string The translated string.
+     */
     public function Translate(string $key): string
     {
         if (file_exists($this->LanguageFile)) {
@@ -35,7 +42,13 @@ class Translation
         }
     }
 
-    public function DoTranslation(string $LanguageFile, string $key)
+    /**
+     * Runs one-off translations (not recommended if you're translating multiple strings).
+     * @param string $LanguageFile The language file to use.
+     * @param string $key The key to translate.
+     * @return string The translated string.
+     */
+    public function DoTranslation(string $LanguageFile, string $key): string
     {
         $LanguageJSON = json_decode($LanguageFile);
 
