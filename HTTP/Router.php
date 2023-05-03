@@ -113,13 +113,15 @@ class Router
         $request_url_parts = explode('/', $request_url);
         array_shift($route_parts);
         array_shift($request_url_parts);
-        if ($route_parts[0] == '' && count($request_url_parts) == 0) {
-            if (is_callable($callback)) {
-                call_user_func_array($callback, []);
+        if (isset($route_parts[0])) {
+            if ($route_parts[0] == '' && count($request_url_parts) == 0) {
+                if (is_callable($callback)) {
+                    call_user_func_array($callback, []);
+                    exit;
+                }
+                require_once __DIR__.'/../../'.$path_to_include;
                 exit;
             }
-            require_once __DIR__.'/../../'.$path_to_include;
-            exit;
         }
         if (count($route_parts) != count($request_url_parts)) {
             return;
