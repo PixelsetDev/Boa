@@ -4,7 +4,7 @@ namespace Boa\Hook;
 
 use Exception;
 
-class Actions
+class Action
 {
     public function Register(string $ActionCode, string|array $Function, mixed $Data = null): void
     {
