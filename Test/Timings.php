@@ -6,7 +6,7 @@
  * Runs load time tests.
  */
 
-namespace Saturn\TestManager;
+namespace Boa\Test;
 
 class Timings
 {
