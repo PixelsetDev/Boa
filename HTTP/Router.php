@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Saturn Response.php - Router.
+ * Boa HTTP - Router.
  *
  * Modified version of the PHPRouter - MIT License (https://github.com/phprouter/main/blob/main/LICENSE)
  */
