@@ -1,0 +1,43 @@
+<?php
+
+namespace Boa\Hook;
+
+use Exception;
+
+class Actions
+{
+    public function Register(string $ActionCode, string|array $Function, mixed $Data = null): void
+    {
+        global $ActionList;
+        $ActionList[$ActionCode][] = [['Function' => $Function, 'Data' => $Data]];
+    }
+
+    public function Unregister(string $ActionCode, string $Function): void
+    {
+        global $ActionList;
+        foreach ($ActionList[$ActionCode] as $HookFunction) {
+            if ($HookFunction['Function'] == $Function) {
+                unset($HookFunction);
+            }
+        }
+    }
+
+    public function Run(string $ActionName): void
+    {
+        global $ActionList;
+        if (!isset($ActionList[$ActionName])) {
+            return;
+        }
+
+        foreach ($ActionList[$ActionName] as $ActionFunction) {
+            try {
+                if ($ActionFunction[0]['Data'] == null) {
+                    call_user_func($ActionFunction[0]['Function']);
+                } else {
+                    call_user_func_array($ActionFunction[0]['Function'], $ActionFunction[0]['Data']);
+                }
+            } catch (Exception) {
+            }
+        }
+    }
+}
