@@ -17,7 +17,7 @@ class MySQL
     public int $num_rows;
     public string|null $error;
 
-    public function __construct(string $Hostname, string $Username, string $Password, string $DatabaseName, string $Port)
+    public function __construct(string $Hostname, string $Username, string $Password, string $DatabaseName, int $Port)
     {
         try {
             $this->mysqli = new mysqli($Hostname, $Username, $Password, $DatabaseName, $Port);
