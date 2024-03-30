@@ -1,3 +1,5 @@
+> Boa is now deprecated. Please use starlight instead where possible. https://github.com/pixelsetdev/starlight
+
 # Boa
 A PHP Library used in Pixelset projects.
 
